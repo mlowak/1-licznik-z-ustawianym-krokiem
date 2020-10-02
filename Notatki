@@ -1,0 +1,42 @@
+Komponenty - pozwalają podzielić interface użytkownika na niezależne pozawalające podobne użycie części; każdy komponent jest osobnym elementem
+React pozawala na tworzenie specjalnych komponentów o nietopwych zadaniach
+
+//Kiedy używać jaki rodzaj Komponentu?//
+
+Jeżeli komponent ma tylko wyświetlać prostą porcję danych - komponent funkcyjny
+
+Jeżeli komponent ma mieć rozbudowaną logikę i np. przechowywać stan komponentu (tutaj stan licznika) - komponent klasowy
+
+Renderowanie komponentu klasowego polega na jak React szuka w klasie komponentu metody render i tego co metoda render zwraca 
+zostaje przerenderowany i wyświetlony w przeglądarce
+
+RETURN
+metody render MUSI zwracać JSXa, który ma główny znacznik 
+
+WRAPPER - element, który obejmuje wszystkie elementy, które są w JSXie
+
+WŁAŚCIWOŚCI komponentów - PROPSY
+to jest obiekt obowiązujący wszystkie atrybuty JSX, które zostały przekazane do instacji komponentu
+w przypadku komponentów klasowych uzyskujemy dostęp poprzez this i odowłuje się poprzez this.props.nazwapropsa
+w przypadku komponentów funkcyjnych - propsy są przekazane jako parametr funkcji tworzącej komponent funkcyjny; odwołuje się poprzez props.nazwapropsa
+
+STAN Komponentu - STATE (tylko Komponenty klasowe)
+state (stan komponentu) to obiekt przechowujący aktualny stan komponentu. 
+Dane przechowywane w obiekcie stanu komponentu są inicjowane w konstruktorze klasy tego komponentu poprzez odwołanie do niego this.state i mogą być uaktualniane podczas działania aplikacji za pomocą metody this.setState().
+
+KOMUNIKACJA (MIĘDZY Komponentami)
+Rodzic -> Dziecko (dane przekazujemy przez propsy dziecka)
+
+Dziecko -> Rodzic (przez propsy dziecka przekazujemy metodę rodzica tzw. callback)
+Natomiast aby przekazać dane od dziecka do rodzica, musimy za pomocą propsów dziecka przekazać metodę (tzw. callback) 
+zdefiniowaną w klasie komponentu rodzica, a w klasie komponentu dziecka ją wywołać poprzez jego propsy,
+przekazując dane jako parametr tej metody.
+
+ŻYCIE Komponentu
+Na samym początku jest cykl inicjalizacji i to właśnie wtedy uruchamiany jest konstruktor (constructor(props)) komponentu, który ustawia wartości początkowe stanu (state) i props’ów.
+
+Następnie następuje cykl montowania komponentu w drzewie DOM. Wywoływana jest wtedy metoda render() komponentu, a na zakończenie cyklu montowania, możemy uruchomić własny kod, wstawiając go do specjalnej metody componentDidMount(), która istnieje w klasie reactowej Component. Podczas tworzenia naszego komponentu, dziedziczymy tą metodę rozszerzając funkcjonalności klasy React.Component {Component}.
+
+Gdy komponent jest już zamontowany w drzewie DOM, aplikacja jest uruchomiona i React nasłuchuje, czy nie zaszły zmiany w stanie naszego komponentu. I jeśli stan komponentu został zaktualizowany uruchamiany jest cykl aktualizacji. Czyli następuje ponowne uruchomienie metody render() oraz wyświetlenie naszego komponentu. A na zakończenie tego procesu możemy uruchomić swój kod, wpisując go do metody comoponentDidUpdate(). Metoda ta jest także dziedziczona z reactowej klasy React.Component {Component}.
+
+I ostatnim cyklem życia komponentu jest cykl odmontowywania go z drzewa DOM. I zanim ten proces się uruchomi, możemy wykonać własny kod uruchamiając metodę componentWillUnmount(), którą dziedziczymy z reactowej klasy React.Component {Component}.

@@ -1,0 +1,11 @@
+.step-counter p {
+    color: blue;
+    display: inline-block;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+input {
+    width: 50px;
+}
